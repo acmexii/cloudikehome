@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="https://cloudike.kr/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cloudike.kr/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cloudike.kr/favicon-32x32.png" />
+
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,user-scalable=no,height=device-height"
+    />
+    <meta content="true" name="HandheldFriendly" />
+    <meta content="width" name="MobileOptimized" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Cloudike" />
+
+    <link rel="mask-icon" href="https://cloudike.kr/safari-pinned-tab.svg" color="#5bbad5" />
+    <!-- Apple Touch -->
+    <link rel="apple-touch-icon" sizes="57x57" href="https://cloudike.kr/assets/favicons/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="https://cloudike.kr/assets/favicons/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="https://cloudike.kr/assets/favicons/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://cloudike.kr/assets/favicons/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="https://cloudike.kr/assets/favicons/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="https://cloudike.kr/assets/favicons/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="https://cloudike.kr/assets/favicons/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="https://cloudike.kr/assets/favicons/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cloudike.kr/assets/favicons/apple-icon-180x180.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="https://cloudike.kr/assets/favicons/android-icon-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cloudike.kr/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="https://cloudike.kr/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cloudike.kr/favicon-16x16.png" />
+    <!-- MSTile -->
+    <meta name="msapplication-TileColor" content="#ffc40d" />
+    <meta name="theme-color" content="#ffffff" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="https://cloudike.kr/manifest.json" />
+    <link rel="manifest" href="https://cloudike.kr/site.webmanifest" />
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    /> -->
+    <style>
+      /* inter-regular - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* inter-500 - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        src: url('/fonts/inter-v13-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* inter-600 - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        src: url('/fonts/inter-v13-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* inter-700 - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        src: url('/fonts/inter-v13-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* noto-sans-kr-regular - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/fonts/noto-sans-kr-v36-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* noto-sans-kr-500 - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 500;
+        src: url('/fonts/noto-sans-kr-v36-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+      /* noto-sans-kr-700 - latin */
+      @font-face {
+        font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 700;
+        src: url('/fonts/noto-sans-kr-v36-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+      }
+    </style>
+
+    <!-- Naver Search Advisor -->
+    <meta name="naver-site-verification" content="3436e8f62b254f525aa61c5966a06e556ca7785b" />
+    <!-- Google Search Console -->
+    <meta name="google-site-verification" content="TEErJVe7bqJsJSzBWhWfkNX1mqAO78LTg1ZLwSQC2QM" />
+
+    <!-- Passing environment variables -->
+    <script src="/cloudikehome/config.js"></script>
+
+    <title>Cloudike</title>
+  <script defer src="/cloudikehome/static/js/lib-react.667e7da4.js"></script><script defer src="/cloudikehome/static/js/lib-router.84eca79c.js"></script><script defer src="/cloudikehome/static/js/4079.09664226.js"></script><script defer src="/cloudikehome/static/js/index.060e92e3.js"></script><link href="https://cloudike.kr/static/css/4079.2f756349.css" rel="stylesheet"></head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <style>
+      .overflow-hidden {
+        overflow: hidden;
+      }
+    </style>
+  </body>
+</html>

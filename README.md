@@ -1,9 +1,9 @@
 # cloudikehome — AX 실습 저장소
 
-https://cloudike.kr 홈페이지를 그대로 옮겨 온 실습용 사본입니다. (교육용, 2026-10-24 수집)
+https://cloudike.kr 사이트 전체(제품·요금·산업별 페이지, 블로그, 문서 등 약 230페이지)를 정적으로 옮겨 온 실습용 사본입니다. (교육용, 2026-10-24 수집) 모든 내부 링크와 이미지·스타일은 GitHub Pages 안에서 동작합니다. 태그 목록·피드 등 일부는 원본 사이트로 연결되며, 문의 폼·채팅 같은 서버 기능은 동작하지 않습니다.
 공개 주소: https://acmexii.github.io/cloudikehome/
 
-- `index.html`, `assets/` : 홈페이지 (GitHub Pages로 공개)
+- `index.html` 및 각 폴더(`price/`, `blog/` 등), `wp-content/`, `wp-includes/` : 사이트 사본 (GitHub Pages로 공개)
 - `marketing/` : 현재 소개서·소개 영상 대본
 - `skills/feature-to-sales-kit/` : ChatGPT에 올려 쓰는 스킬
 
