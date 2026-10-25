@@ -14,6 +14,7 @@ class Element {
   append(...items){this.children.push(...items);}
   replaceChildren(...items){this.children=items;}
   focus(){}
+  select(){this.selected=true;}
   showModal(){this.open=true;}
   close(){this.open=false;}
   setCustomValidity(message){this.validationMessage=message;}
@@ -47,11 +48,11 @@ test('create, submit multiple files, aggregate and restore after reload',()=>{
   assert.equal(app.$('submission-rows').children.length,2);
   assert.match(app.$('fr-status').textContent,/접수 완료/);
   const saved=JSON.parse(app.storage.get(KEY));assert.equal(saved[0].files[1].submitter,'김실습');
-  assert.deepEqual(Object.keys(saved[0].files[0]).sort(),['id','name','size','submittedAt','submitter']);
+  assert.deepEqual(Object.keys(saved[0].files[0]).sort(),['id','name','size','submissionId','submittedAt','submitter']);
   const restored=boot(app.storage,app.location.hash);
   assert.equal(restored.$('file-count').textContent,2);
   assert.equal(restored.$('submission-rows').children[0].children[0].textContent,'결과물.txt');
-  restored.create('별도 요청');assert.equal(restored.$('request-count').textContent,2);assert.equal(restored.$('detail-total').textContent,'제출 파일 0개');
+  restored.create('별도 요청');assert.equal(restored.$('request-count').textContent,2);assert.equal(restored.$('detail-total').textContent,'제출 0건 · 파일 0개');
 });
 test('reject whitespace titles, missing files, blank submitters and batches above 10',()=>{
   const app=boot();app.create('   ');assert.equal(app.$('request-count').textContent,0);
@@ -86,4 +87,22 @@ test('request link opens the selected request in the same browser',()=>{
   assert.equal(link.pathname,'/cloudikehome/app/file-requests/');
   const reopened=boot(app.storage,link.hash);
   assert.equal(reopened.$('detail-title').textContent,'10월 프로젝트 산출물 제출');
+});
+
+test('count one submission per batch and preserve the count after reload',()=>{
+  const app=boot();app.create('10월 프로젝트 산출물 제출');
+  app.submit([{name:'a.txt',size:1},{name:'b.txt',size:2}]);
+  assert.equal(app.$('detail-total').textContent,'제출 1건 · 파일 2개');
+  app.submit([{name:'c.txt',size:3}]);
+  assert.equal(app.$('detail-total').textContent,'제출 2건 · 파일 3개');
+  const restored=boot(app.storage,app.location.hash);
+  assert.equal(restored.$('detail-total').textContent,'제출 2건 · 파일 3개');
+  assert.equal(restored.$('request-rows').children[0].children[2].textContent,'2건 · 3개');
+});
+
+test('copy failure selects the link for manual copying',async()=>{
+  const app=boot();app.create();
+  await app.$('copy-request-link').fire('click');
+  assert.equal(app.$('request-link').selected,true);
+  assert.match(app.$('fr-status').textContent,/직접 복사/);
 });
