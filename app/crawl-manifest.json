@@ -1,0 +1,38 @@
+{
+  "source": "https://apex.cloudike.kr/dashboard",
+  "captured_date_kst": "2026-10-25",
+  "routes": [
+    "clipbook",
+    "company-folder",
+    "dashboard",
+    "documents",
+    "favorites",
+    "settings/activity-logs",
+    "settings/backup",
+    "settings/backup/archive",
+    "settings/company",
+    "settings/company/forms",
+    "settings/plan",
+    "settings/plan/business",
+    "settings/plan/enterprise",
+    "settings/profile",
+    "settings/profile/cloudastream",
+    "settings/team-management",
+    "settings/team-management/groups",
+    "settings/team-management/organization",
+    "shared-documents/by-me",
+    "shared-documents/links",
+    "shared-documents/to-me",
+    "trash"
+  ],
+  "page_count": 22,
+  "personal_data": "replaced with demo values",
+  "api_connection": false,
+  "excluded": [
+    "document contents",
+    "credentials and sessions",
+    "tier-restricted electronic approvals",
+    "payment and mutating actions"
+  ],
+  "snapshot_not_live_app": true
+}
