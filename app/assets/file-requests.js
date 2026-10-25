@@ -13,7 +13,7 @@
     if (!Array.isArray(value)) throw new Error('Invalid requests');
     return value.filter(r => r && typeof r.id === 'string' && typeof r.title === 'string' && validDate(r.due) && Array.isArray(r.files)).map(r => ({
       id:r.id,title:r.title.slice(0,80),description:typeof r.description==='string'?r.description.slice(0,600):'',due:r.due,
-      createdAt:typeof r.createdAt==='string'?r.createdAt:'',files:r.files.filter(f => f && typeof f.name==='string' && typeof f.submitter==='string' && typeof f.submittedAt==='string' && Number.isFinite(f.size) && f.size>=0).map(f => ({id:typeof f.id==='string'?f.id:uid(),name:f.name.slice(0,255),size:f.size,submitter:f.submitter.slice(0,40),submittedAt:f.submittedAt}))
+      createdAt:typeof r.createdAt==='string'?r.createdAt:'',files:r.files.filter(f => f && typeof f.name==='string' && typeof f.submitter==='string' && typeof f.submittedAt==='string' && Number.isFinite(f.size) && f.size>=0).map(f => ({submissionId:typeof f.submissionId==='string'?f.submissionId:(typeof f.id==='string'?f.id:uid()),id:typeof f.id==='string'?f.id:uid(),name:f.name.slice(0,255),size:f.size,submitter:f.submitter.slice(0,40),submittedAt:f.submittedAt}))
     }));
   }
   function read() {
@@ -32,6 +32,7 @@
     const el=document.createElement(tag); if(text!==undefined) el.textContent=text; if(className) el.className=className; return el;
   }
   const closed = r => r.due < localDate();
+  const submissionCount = r => new Set(r.files.map(f=>f.submissionId||f.id)).size;
   const current = () => requests.find(r=>r.id===currentId);
   function bytes(size) { return size<1024?`${size} B`:size<1024*1024?`${(size/1024).toFixed(1)} KB`:`${(size/(1024*1024)).toFixed(1)} MB`; }
   function stamp(value) { const d=new Date(value);return Number.isNaN(d.getTime())?'-':d.toLocaleString('ko-KR'); }
@@ -42,7 +43,7 @@
     const body=$('request-rows');body.replaceChildren();
     $('request-empty').hidden=!!requests.length;$('request-table').hidden=!requests.length;
     for(const r of requests) {
-      const row=node('tr'), title=node('td'), button=node('button',r.title,'fr-title-button');button.type='button';button.addEventListener('click',()=>open(r.id));title.append(button);row.append(title,node('td',r.due),node('td',`${r.files.length}개`));
+      const row=node('tr'), title=node('td'), button=node('button',r.title,'fr-title-button');button.type='button';button.addEventListener('click',()=>open(r.id));title.append(button);row.append(title,node('td',r.due),node('td',`${submissionCount(r)}건 · ${r.files.length}개`));
       const status=node('td');status.append(node('span',closed(r)?'기한 마감':'접수 중',`fr-tag${closed(r)?' fr-tag-closed':''}`));row.append(status);body.append(row);
     }
     if(currentId) renderDetail();
@@ -51,7 +52,7 @@
     const r=current(); if(!r) { currentId=null;$('request-detail').hidden=true;return; }
     $('request-link').value=`${location.origin}${location.pathname}#request=${encodeURIComponent(r.id)}`;
     $('detail-title').textContent=r.title;$('detail-description').textContent=r.description||'별도의 요청 설명이 없습니다.';
-    $('detail-due').textContent=`제출 기한 ${r.due}`;$('detail-total').textContent=`제출 파일 ${r.files.length}개`;
+    $('detail-due').textContent=`제출 기한 ${r.due}`;$('detail-total').textContent=`제출 ${submissionCount(r)}건 · 파일 ${r.files.length}개`;
     $('detail-state').textContent=closed(r)?'기한 마감':'접수 중';
     $('submit-files').disabled=closed(r);$('submission-name').disabled=closed(r);$('submission-files').disabled=closed(r);$('sample-files').disabled=closed(r);
     $('submission-help').textContent=closed(r)?'제출 기한이 지나 파일을 제출할 수 없습니다.':'파일 본문은 읽거나 전송하지 않고 이름·크기만 기록합니다.';
@@ -97,9 +98,13 @@
     const files=Array.from($('submission-files').files);
     if(!files.length) return;
     if(files.length>10) {notify('한 번에 파일을 10개까지 선택해 주세요.',true);return;}
-    const now=new Date().toISOString();
-    r.files.push(...files.map(f=>({id:uid(),name:f.name,size:f.size,submitter:name,submittedAt:now})));
+    const now=new Date().toISOString(), submissionId=uid();
+    r.files.push(...files.map(f=>({id:uid(),submissionId,name:f.name,size:f.size,submitter:name,submittedAt:now})));
     save();$('submission-form').reset();render();notify(`접수 완료: 파일 ${files.length}개가 제출 결과에 추가되었습니다.`);$('submission-results').focus();
+  });
+  $('copy-request-link').addEventListener('click',async()=>{
+    try { await navigator.clipboard.writeText($('request-link').value);notify('제출 화면 링크를 복사했습니다. 이 실습에서는 같은 브라우저에서 열어 주세요.'); }
+    catch { $('request-link').focus();$('request-link').select();notify('링크를 선택했습니다. 직접 복사해 주세요.',true); }
   });
   $('close-detail').addEventListener('click',()=>{currentId=null;$('request-detail').hidden=true;history.replaceState(null,'',location.pathname);$('new-request').focus();});
   window.addEventListener('storage',event=>{if(event.key===KEY){read();render();}});
