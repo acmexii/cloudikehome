@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>파일 요청함 · Cloudike</title><link rel="stylesheet" href="../assets/file-requests.css"></head>
+<body>
+<aside><a class="brand" href="../dashboard/">cloudike<span>팀의 파일을 한곳에</span></a><nav aria-label="주 메뉴"><a href="../dashboard/">대시보드</a><a href="../documents/">모든 문서함</a><a href="../shared-documents/by-me/">공유 문서함</a><a href="../company-folder/">기업 문서함</a><a href="./" aria-current="page">파일 요청함 <small>NEW</small></a><a href="../clipbook/">클립북</a><a href="../favorites/">즐겨찾기</a></nav><p class="aside-note">필요한 파일을 요청하고<br>제출 현황을 한눈에 확인하세요.</p></aside>
+<main>
+<header><span>워크스페이스 / 파일 요청함</span><span class="avatar">C</span></header>
+<div class="notice">실습용 데모 · 요청과 예시 제출 기록은 이 브라우저에만 저장됩니다. 다른 기기의 제출은 동기화되지 않으며 실제 파일은 업로드하지 않습니다.</div>
+<section id="manager">
+<div class="heading"><div><p class="eyebrow">FILE REQUESTS</p><h1>파일 요청함</h1><p>링크 하나로 필요한 파일을 모으세요.</p></div><button id="new-request" class="primary">＋ 요청 만들기</button></div>
+<div class="summary"><div><span>전체 요청</span><strong id="total">0</strong></div><div><span>진행 중</span><strong id="active">0</strong></div><div><span>제출 파일</span><strong id="submitted">0</strong></div></div>
+<div class="panel"><div class="panel-heading"><h2>요청 목록</h2><span>요청을 선택하면 제출 파일을 확인할 수 있어요.</span></div><div class="table-wrap"><table><thead><tr><th>요청명</th><th>제출 기한</th><th>제출 건수</th><th>진행 상태</th><th>제출 링크</th></tr></thead><tbody id="requests"></tbody></table></div><p id="empty" class="empty">아직 요청이 없습니다. ‘요청 만들기’로 첫 파일 요청을 시작하세요.</p></div>
+<section id="detail" class="panel" hidden aria-label="제출 결과"></section>
+</section>
+<section id="submission" class="panel submit-panel" hidden></section>
+<p id="feedback" role="status" aria-live="polite"></p>
+</main>
+<dialog id="create-dialog"><form id="create-form"><div class="heading"><h2>파일 요청 만들기</h2><button type="button" id="close-dialog" aria-label="닫기">✕</button></div><p>참여자에게 필요한 파일과 제출 기한을 알려주세요.</p><label>요청 제목<input name="title" required maxlength="100" placeholder="10월 프로젝트 산출물 제출"></label><label>설명<textarea name="description" required maxlength="2000" rows="4" placeholder="최종 보고서와 디자인 산출물을 제출해 주세요."></textarea></label><label>제출 기한<input name="deadline" type="date" required></label><p class="hint">선택한 날짜 23:59까지 제출할 수 있습니다.</p><p id="create-error" role="alert"></p><div class="actions"><button type="button" id="cancel-dialog">취소</button><button class="primary" type="submit">요청 생성</button></div></form></dialog>
+<script src="../assets/file-requests.js"></script>
+</body></html>
